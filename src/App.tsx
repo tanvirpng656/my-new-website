@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const CONTENT = {
   name: "Tanvir Anjum",
@@ -41,11 +41,13 @@ const THEME = {
   accentDim: "#a83e16",
 };
 
-function useCursorTrail(active) {
-  const [dots, setDots] = useState([]);
+type Dot = { id: number; x: number; y: number };
+
+function useCursorTrail(active: boolean): Dot[] {
+  const [dots, setDots] = useState<Dot[]>([]);
   const idRef = useRef(0);
-  const posRef = useRef(null);
-  const rafRef = useRef(null);
+  const posRef = useRef<{ x: number; y: number } | null>(null);
+  const rafRef = useRef<number | null>(null);
   const reducedMotionRef = useRef(false);
 
   useEffect(() => {
@@ -53,7 +55,7 @@ function useCursorTrail(active) {
 
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     reducedMotionRef.current = mq.matches;
-    const handleChange = (e) => {
+    const handleChange = (e: MediaQueryListEvent) => {
       reducedMotionRef.current = e.matches;
     };
     mq.addEventListener("change", handleChange);
@@ -62,7 +64,7 @@ function useCursorTrail(active) {
       return () => mq.removeEventListener("change", handleChange);
     }
 
-    function handleMove(e) {
+    function handleMove(e: MouseEvent) {
       posRef.current = { x: e.clientX, y: e.clientY };
     }
     window.addEventListener("mousemove", handleMove);
@@ -99,7 +101,7 @@ export default function App() {
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     setReducedMotion(mq.matches);
-    const handleChange = (e) => setReducedMotion(e.matches);
+    const handleChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
     mq.addEventListener("change", handleChange);
     return () => mq.removeEventListener("change", handleChange);
   }, []);
