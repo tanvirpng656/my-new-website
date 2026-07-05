@@ -111,10 +111,11 @@ export default function App() {
       style={{
         position: "relative",
         minHeight: "100vh",
+        width: "100%",
         background: THEME.bg,
         color: THEME.text,
         fontFamily: "'Helvetica Neue', Arial, sans-serif",
-        overflow: "hidden",
+        overflowX: "hidden",
         cursor: reducedMotion ? "auto" : "none",
       }}
     >
@@ -123,8 +124,10 @@ export default function App() {
         html, body, #root {
           margin: 0;
           padding: 0;
+          width: 100%;
           background: ${THEME.bg};
           min-height: 100%;
+          overflow-x: hidden;
         }
         .ta-dot {
           position: fixed;
@@ -177,7 +180,7 @@ export default function App() {
           zIndex: 20,
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-between",
+          justifyContent: "center",
           padding: "22px 6%",
           background: "rgba(10,10,10,0.85)",
           backdropFilter: "blur(6px)",
@@ -189,59 +192,13 @@ export default function App() {
         </span>
       </header>
 
-      <section
-        style={{
-          padding: "min(14vh, 140px) 6% 80px",
-          maxWidth: 900,
-          margin: "0 auto",
-          textAlign: "center",
-        }}
-      >
-        <p
+      <div style={{ maxWidth: 1100, margin: "0 auto", width: "100%" }}>
+        <section
           style={{
-            color: THEME.accent,
-            fontSize: 13,
-            letterSpacing: "0.18em",
-            textTransform: "uppercase",
-            marginBottom: 18,
+            padding: "min(14vh, 140px) 6% 80px",
+            textAlign: "center",
           }}
         >
-          Portfolio
-        </p>
-        <h1
-          style={{
-            fontSize: "clamp(36px, 7vw, 68px)",
-            lineHeight: 1.05,
-            margin: "0 0 20px",
-            fontWeight: 700,
-          }}
-        >
-          {CONTENT.name}
-        </h1>
-        <h2
-          style={{
-            fontSize: "clamp(18px, 2.6vw, 26px)",
-            fontWeight: 400,
-            color: THEME.textDim,
-            margin: "0 0 24px",
-          }}
-        >
-          {CONTENT.title}
-        </h2>
-        <p style={{ fontSize: 16, color: THEME.textDim, maxWidth: 520, margin: "0 auto" }}>
-          {CONTENT.tagline}
-        </p>
-      </section>
-
-      <section
-        id="about"
-        style={{
-          padding: "60px 6%",
-          borderTop: `1px solid ${THEME.border}`,
-          background: THEME.bgAlt,
-        }}
-      >
-        <div style={{ maxWidth: 780, margin: "0 auto", textAlign: "center" }}>
           <p
             style={{
               color: THEME.accent,
@@ -251,89 +208,137 @@ export default function App() {
               marginBottom: 18,
             }}
           >
-            About
+            Portfolio
           </p>
-          <p style={{ fontSize: 17, lineHeight: 1.75, color: THEME.text }}>
-            {CONTENT.about}
+          <h1
+            style={{
+              fontSize: "clamp(36px, 7vw, 68px)",
+              lineHeight: 1.05,
+              margin: "0 0 20px",
+              fontWeight: 700,
+            }}
+          >
+            {CONTENT.name}
+          </h1>
+          <h2
+            style={{
+              fontSize: "clamp(18px, 2.6vw, 26px)",
+              fontWeight: 400,
+              color: THEME.textDim,
+              margin: "0 0 24px",
+            }}
+          >
+            {CONTENT.title}
+          </h2>
+          <p style={{ fontSize: 16, color: THEME.textDim, maxWidth: 520, margin: "0 auto" }}>
+            {CONTENT.tagline}
           </p>
-        </div>
-      </section>
+        </section>
 
-      <section id="focus" style={{ padding: "70px 6%" }}>
-        <p
+        <section
+          id="about"
           style={{
-            color: THEME.accent,
-            fontSize: 13,
-            letterSpacing: "0.18em",
-            textTransform: "uppercase",
-            marginBottom: 30,
+            padding: "60px 6%",
+            borderTop: `1px solid ${THEME.border}`,
+            background: THEME.bgAlt,
           }}
         >
-          Focus
-        </p>
-        <div
+          <div style={{ maxWidth: 780, margin: "0 auto", textAlign: "center" }}>
+            <p
+              style={{
+                color: THEME.accent,
+                fontSize: 13,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                marginBottom: 18,
+              }}
+            >
+              About
+            </p>
+            <p style={{ fontSize: 17, lineHeight: 1.75, color: THEME.text }}>
+              {CONTENT.about}
+            </p>
+          </div>
+        </section>
+
+        <section id="focus" style={{ padding: "70px 6%" }}>
+          <p
+            style={{
+              color: THEME.accent,
+              fontSize: 13,
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              marginBottom: 30,
+              textAlign: "center",
+            }}
+          >
+            Focus
+          </p>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+              gap: 20,
+            }}
+          >
+            {CONTENT.focus.map((f) => (
+              <div className="ta-card" key={f.label}>
+                <h3 style={{ margin: "0 0 10px", fontSize: 18, color: THEME.text }}>
+                  {f.label}
+                </h3>
+                <p style={{ margin: 0, color: THEME.textDim, fontSize: 14.5, lineHeight: 1.6 }}>
+                  {f.detail}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section
+          id="contact"
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-            gap: 20,
+            padding: "80px 6% 100px",
+            borderTop: `1px solid ${THEME.border}`,
+            background: THEME.bgAlt,
+            textAlign: "center",
           }}
         >
-          {CONTENT.focus.map((f) => (
-            <div className="ta-card" key={f.label}>
-              <h3 style={{ margin: "0 0 10px", fontSize: 18, color: THEME.text }}>
-                {f.label}
-              </h3>
-              <p style={{ margin: 0, color: THEME.textDim, fontSize: 14.5, lineHeight: 1.6 }}>
-                {f.detail}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
+          <p
+            style={{
+              color: THEME.accent,
+              fontSize: 13,
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              marginBottom: 18,
+            }}
+          >
+            Contact
+          </p>
+          <h2 style={{ fontSize: "clamp(24px, 4vw, 36px)", margin: "0 0 30px", fontWeight: 700 }}>
+            Let's talk.
+          </h2>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 40, justifyContent: "center" }}>
+            {CONTENT.contact.map((c) => (
+              <a key={c.label} href={c.href} className="ta-link" style={{ fontSize: 16 }}>
+                <span style={{ color: THEME.textDim, marginRight: 8 }}>{c.label}</span>
+                {c.handle}
+              </a>
+            ))}
+          </div>
+        </section>
 
-      <section
-        id="contact"
-        style={{
-          padding: "80px 6% 100px",
-          borderTop: `1px solid ${THEME.border}`,
-          background: THEME.bgAlt,
-          textAlign: "center",
-        }}
-      >
-        <p
+        <footer
           style={{
-            color: THEME.accent,
-            fontSize: 13,
-            letterSpacing: "0.18em",
-            textTransform: "uppercase",
-            marginBottom: 18,
+            padding: "24px 6%",
+            borderTop: `1px solid ${THEME.border}`,
+            color: THEME.textDim,
+            fontSize: 12.5,
+            textAlign: "center",
           }}
         >
-          Contact
-        </p>
-        <h2 style={{ fontSize: "clamp(24px, 4vw, 36px)", margin: "0 0 30px", fontWeight: 700 }}>
-          Let's talk.
-        </h2>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 40, justifyContent: "center" }}>
-          {CONTENT.contact.map((c) => (
-            <a key={c.label} href={c.href} className="ta-link" style={{ fontSize: 16 }}>
-              <span style={{ color: THEME.textDim, marginRight: 8 }}>{c.label}</span>
-              {c.handle}
-            </a>
-          ))}
-        </div>
-      </section>
-
-      <footer
-        style={{
-          padding: "24px 6%",
-          borderTop: `1px solid ${THEME.border}`,
-          color: THEME.textDim,
-          fontSize: 12.5,
-        }}
-      >
-        © {new Date().getFullYear()} {CONTENT.name}
-      </footer>
+          © {new Date().getFullYear()} {CONTENT.name}
+        </footer>
+      </div>
     </div>
   );
 }
