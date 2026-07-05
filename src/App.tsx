@@ -120,6 +120,12 @@ export default function App() {
     >
       <style>{`
         * { box-sizing: border-box; }
+        html, body, #root {
+          margin: 0;
+          padding: 0;
+          background: ${THEME.bg};
+          min-height: 100%;
+        }
         .ta-dot {
           position: fixed;
           top: 0;
